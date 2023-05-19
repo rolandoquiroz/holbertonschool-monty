@@ -12,62 +12,62 @@ char *line = NULL;
 int main(int argc, char **argv)
 {
 
-    unsigned int line_number = 1;
-    char *command = NULL;
-    int var;
+	unsigned int line_number = 1;
+	char *command = NULL;
+	int var;
 
-    stack_t *stack = NULL;
+	stack_t *stack = NULL;
 
-    if (argc != 2)
-    {
-        fprintf(stderr, "USAGE: monty file\n");
-        exit(EXIT_FAILURE);
-    }
+	if (argc != 2)
+	{
+		fprintf(stderr, "USAGE: monty file\n");
+		exit(EXIT_FAILURE);
+	}
 
-    while ((line = lines_reader(argv[1], line_number)) != NULL)
-    {
-        
-        command = strtok(line, " \r\t\n");
-        if (command == NULL)
-        {
-            line_number++;
-            free(line);
-            continue;
-        }
-        
-        if (strcmp(command, "push") == 0)
-        {
-            var = 1;
-        }
-        else if (strcmp(command, "pall") == 0)
-        {
-            var = 2;
-        }
-        else
-        {
-            var = 0;
-        }
+	while ((line = lines_reader(argv[1], line_number)) != NULL)
+	{
+		
+		command = strtok(line, " \r\t\n");
+		if (command == NULL)
+		{
+			line_number++;
+			free(line);
+			continue;
+		}
+		
+		if (strcmp(command, "push") == 0)
+		{
+			var = 1;
+		}
+		else if (strcmp(command, "pall") == 0)
+		{
+			var = 2;
+		}
+		else
+		{
+			var = 0;
+		}
 
-        switch (var)
-        {
-        case 1:
-            push(&stack, line_number);
-            break;
+		switch (var)
+		{
+		case 1:
+			push(&stack, line_number);
+			break;
 
-        case 2:
-            pall(&stack, line_number);
-            break;
-        
-        default:
-            dprintf(STDERR_FILENO, "L%u: unknown instruction %s\n", line_number, command);
-            exit(EXIT_FAILURE);
-        }
+		case 2:
+			pall(&stack, line_number);
+			break;
+		
+		default:
+			dprintf(STDERR_FILENO, "L%u: unknown instruction %s\n", line_number, command);
+			exit(EXIT_FAILURE);
+		}
 
-        free(line);
-        line_number++;
-    }
+		free(line);
+		line_number++;
+	}
 
-    stack_freer(stack);
+	stack_freer(stack);
 
-    return (EXIT_SUCCESS);
+	return (EXIT_SUCCESS);
 }

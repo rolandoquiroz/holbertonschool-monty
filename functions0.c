@@ -9,17 +9,17 @@
  */
 void push(stack_t **stack, unsigned int line_number)
 {
-    char *number = NULL;
-    int n;
+	char *number = NULL;
+	int n;
 
-    number = strtok(NULL, " \r\t\n");
-    if (number == NULL)
-    {
-        dprintf(STDERR_FILENO, "L%u: usage: push integer\n", line_number);
-        free(line);
-        stack_freer(*stack);
-        exit(EXIT_FAILURE);
-    }
+	number = strtok(NULL, " \r\t\n");
+	if (number == NULL)
+	{
+		dprintf(STDERR_FILENO, "L%u: usage: push integer\n", line_number);
+		free(line);
+		stack_freer(*stack);
+		exit(EXIT_FAILURE);
+	}
 
 	if (!strcmp(number, "0") || !strcmp(number, "-0"))
 		n = 0;
@@ -27,17 +27,17 @@ void push(stack_t **stack, unsigned int line_number)
 	{
 		n = atoi(number);
 		if (n == 0 || contains_letter(number))
-        {
-            dprintf(STDERR_FILENO, "L%u: usage: push integer\n", line_number);
-            free(line);
-            stack_freer(*stack);
-            exit(EXIT_FAILURE);
-        }
+		{
+			dprintf(STDERR_FILENO, "L%u: usage: push integer\n", line_number);
+			free(line);
+			stack_freer(*stack);
+			exit(EXIT_FAILURE);
+		}
 	}
 
-    /*printf("Numero fuera de la pila %d\n", n);*/
-    
-    stack_t *new_node = NULL;
+	/*printf("Numero fuera de la pila %d\n", n);*/
+	
+	stack_t *new_node = NULL;
 
 	if (stack == NULL)
 		return;
@@ -61,36 +61,28 @@ void push(stack_t **stack, unsigned int line_number)
 	*stack = new_node;
 
 
-    /*printf("Numero dentro de la pila %d\n", (*stack)->n);*/
+	/*printf("Numero dentro de la pila %d\n", (*stack)->n);*/
 
 	return;
 }
 
-
-
 void pall(stack_t **stack, unsigned int line_number)
 {
-    (void)line_number;
+	(void)line_number;
 
-    stack_t *i = NULL;
+	stack_t *i = NULL;
 
-    if (stack == NULL)
-        return;
-    
-    if (*stack == NULL)
-        return;
+	if (stack == NULL)
+		return;
+	
+	if (*stack == NULL)
+		return;
 
-    for (i = *stack; i != NULL; i = i->next)
-        printf("%d\n", i->n);
+	for (i = *stack; i != NULL; i = i->next)
+		printf("%d\n", i->n);
 }
-
 
 void nop(stack_t **stack, unsigned int line_number)
 {
   (void)stack, (void)line_number;
 }
-
-
-
-
-
