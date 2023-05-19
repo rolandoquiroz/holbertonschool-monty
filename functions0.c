@@ -21,19 +21,19 @@ void push(stack_t **stack, unsigned int line_number)
         exit(EXIT_FAILURE);
     }
 
-    if ((strcmp(number, "0") == 0) || (strcmp(number, "-0") == 0))
-        n = 0;
-    else
-    {
-        n = atoi(number);
-        if (n == 0)
+	if (!strcmp(number, "0") || !strcmp(number, "-0"))
+		n = 0;
+	else
+	{
+		n = atoi(number);
+		if (n == 0 || contains_letter(number))
         {
             dprintf(STDERR_FILENO, "L%u: usage: push integer\n", line_number);
             free(line);
             stack_freer(*stack);
             exit(EXIT_FAILURE);
         }
-    }
+	}
 
     /*printf("Numero fuera de la pila %d\n", n);*/
     
