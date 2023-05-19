@@ -26,8 +26,7 @@ int main(int argc, char **argv)
 
     while ((line = lines_reader(argv[1], line_number)) != NULL)
     {
-       
-
+        
         command = strtok(line, " \r\t\n");
         if (command == NULL)
         {
@@ -58,19 +57,11 @@ int main(int argc, char **argv)
         case 2:
             pall(&stack, line_number);
             break;
+        
         default:
             dprintf(STDERR_FILENO, "L%u: unknown instruction %s\n", line_number, command);
             exit(EXIT_FAILURE);
         }
-
-        /*
-
-        if (strcmp(command, "nop") == 0)
-        {
-            nop(&stack, line_number);
-        }
-
-        */
 
         free(line);
         line_number++;

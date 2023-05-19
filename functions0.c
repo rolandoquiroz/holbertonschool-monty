@@ -21,7 +21,7 @@ void push(stack_t **stack, unsigned int line_number)
         exit(EXIT_FAILURE);
     }
 
-    if (strcmp(number, "0") == 0)
+    if ((strcmp(number, "0") == 0) || (strcmp(number, "-0") == 0))
         n = 0;
     else
     {
